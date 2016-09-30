@@ -6,7 +6,8 @@
 Welcome to Super DB Administrator's documentation!
 ==================================================
 
-Contents:
+El contenido de la documentacion es este texto.
+
 
 .. toctree::
    :maxdepth: 2
