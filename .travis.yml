@@ -13,4 +13,4 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION"
 # command to run tests
-script: nosetests
+script: super_db_administrator/manage.py test
