@@ -3,3 +3,5 @@ docs/build
 env3/
 chromedriver
 db.sqlite3
+super_db_front/node_modules
+super_db_front/app/*.js*

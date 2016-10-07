@@ -1,8 +1,10 @@
 from selenium import webdriver
 
-from django.test import LiveServerTestCase
+from django.test import LiveServerTestCase, TestCase
 from django.conf import settings
+from django.core.urlresolvers import resolve
 
+from .views import IndexView
 
 class SuperDBTestCase(LiveServerTestCase):
 
@@ -18,3 +20,9 @@ class SuperDBTestCase(LiveServerTestCase):
         home_page = self.browser.get(self.live_server_url + '/')
         title_element = self.browser.find_element_by_css_selector('#main_heading')
         self.assertEqual('SuperDB Administrator', title_element.text)
+
+class CoreURLsTestCase(TestCase):
+
+    def test_root_url(self):
+        root = resolve('/')
+        self.assertEqual(root.func, IndexView.as_view())
