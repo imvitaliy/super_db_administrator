@@ -11,4 +11,3 @@ install:
   - pip install -q Django==$DJANGO_VERSION
 # command to run tests
 script: super_db_administrator/manage.py test
-s
