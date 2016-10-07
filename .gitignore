@@ -2,3 +2,4 @@
 docs/build
 env3/
 chromedriver
+db.sqlite3
