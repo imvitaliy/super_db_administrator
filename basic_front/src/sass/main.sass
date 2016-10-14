@@ -1,0 +1,176 @@
+
+@import "variables"
+@import "mixins"
+
+@import "fontawesome/font-awesome"
+
+// "Inspired" by:
+// http://arisedashboard.com/sport/index.html
+
+
+body
+  background-color: $dark_gray
+
+  // @include respond-to(mobileM)
+  //   background-color: red
+  //
+  // @include respond-to(mobileL)
+  //   background-color: green
+  //
+  // @include respond-to(tablet)
+  //   background-color: blue
+  //
+  // @include respond-to(laptop)
+  //   background-color: black
+  //
+  // @include respond-to(laptopL)
+  //   background-color: white
+
+p
+  margin: 0
+
+.Body
+  display: flex
+  flex-direction: column
+  padding: 0
+  margin: 0
+  height: 100%
+
+.MainContent, .MainHeader
+  background-color: $medium2_gray
+
+.MainHeader
+  flex-basis: 60px
+  max-height: 60px
+  display: flex
+  align-items: center
+  padding: 0 1em
+  background-color: $medium_gray
+  border-bottom: 1px solid $medium3_gray
+
+
+.Logo
+  flex-basis: 200px
+  h1
+    margin: 0
+    font-size: 20px
+    color: white
+
+.MenuToogle
+  flex-basis: 40px
+  height: 40px
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 1px solid $medium3_gray
+  background-color: $medium2_gray
+  border-radius: 10px
+  color: orange
+  cursor: pointer
+
+.MainContent
+  flex: 1
+  position: relative
+  height: 100%
+
+.MainNav
+  background-color: $medium_gray
+  width: 200px
+  box-sizing: border-box
+  max-width: 200px
+  height: 100%
+  display: inline-block
+  position: absolute
+  border-right: 1px solid $medium3_gray
+  border-top: 1px solid $medium3_gray
+  transition: all .6s
+  padding: 1em
+
+  &.hide
+    transform: translateX(-210px)
+
+.Content
+  background-color: $dark_gray
+  height: 100%
+  padding: 1em
+
+.HeaderNav
+  display: flex
+  flex: 1
+  padding-right: 2em
+  height: 60px
+
+.HeaderNav-wrapper
+  display: flex
+  flex: 1
+  justify-content: flex-end
+
+.HeaderNav-Icon
+  flex-basis: 3em
+  font-size: 1.1em
+  display: none
+  align-items: center
+  justify-content: center
+  color: gray
+  cursor: pointer
+  i
+    position: relative
+    span
+      background-color: $dark_gray
+      border-radius: 5px
+      border: 1px solid black
+      box-sizing: border-box
+      color: white
+      display: inline-block
+      font-size: 0.5em
+      height: 20px
+      padding: .3em
+      position: absolute
+      text-align: center
+      width: 20px
+      top: -10px
+      right: -10px
+
+  @include respond-to(tablet)
+    display: flex
+
+.Notifications
+  i
+    span
+      background-color: $blue
+.Tasks
+  i
+    span
+      background-color: $red
+.Profile
+  flex-basis: 9em
+  justify-content: space-around
+
+.Profile-NameWrapper
+  display: flex
+  flex-direction: column
+  flex: 1
+  font-size: .8em
+  text-align: right
+  padding-right: 1em
+
+.NameWrapper-name
+  color: white
+
+.NameWrapper-role
+  color: gray
+
+.Profile-PictureWrapper
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: black
+  height: 100%
+  flex-basis: 40px
+  img
+    width: 20px
+    height: 20px
+
+.Profile-List
+
+.Profile
