@@ -1,0 +1,24 @@
+
+// Mixin for Media Query
+
+@mixin respond-to ($media)
+
+  @if $media == mobileM
+    @media screen and (min-width: $mobileM )
+      @content
+
+  @else if $media == mobileL
+    @media screen and (min-width: $mobileL)
+      @content
+
+  @else if $media == tablet
+    @media screen and (min-width: $tablet)
+      @content
+
+  @else if $media == laptop
+    @media screen and (min-width: $laptop)
+      @content
+
+  @else if $media == laptopL
+    @media screen and (min-width: $laptopL)
+      @content
