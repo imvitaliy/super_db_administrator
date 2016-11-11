@@ -1,9 +1,10 @@
 from django.db import models
 
-# class DataBaseConfiguration(models.Model):
-#     name = models.CharField(max_length=200, blank=False)
+from core.behaviours import SlugableBehaviour
 
-class ConnectionDb(models.Model):
+
+class ConnectionDb(SlugableBehaviour, models.Model):
+    name = models.CharField(max_length=100, default="")
     db_name = models.CharField(max_length=200, blank=False, null=False)
     host = models.CharField(max_length=500, blank=False, null=False)
     port = models.IntegerField(blank=False, null=False)

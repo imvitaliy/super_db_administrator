@@ -4,7 +4,9 @@ from django.test import LiveServerTestCase, TestCase
 from django.conf import settings
 from django.core.urlresolvers import resolve
 
+from .models import Entity
 from .views import IndexView
+
 
 class SuperDBTestCase(LiveServerTestCase):
 
@@ -21,8 +23,25 @@ class SuperDBTestCase(LiveServerTestCase):
         title_element = self.browser.find_element_by_css_selector('#main_heading')
         self.assertEqual('SuperDB Administrator', title_element.text)
 
+
 class CoreURLsTestCase(TestCase):
 
     def test_root_url(self):
         root = resolve('/')
         self.assertEqual(root.func, IndexView.as_view())
+
+
+class EntityTestCase(TestCase):
+
+    def setUp(self):
+        e1 = Entity.objects.create(name="Sevilla")
+        e2 = Entity.objects.create(name="Sevilla")
+
+    def test_entities_unique(self):
+        entities = Entity.objects.filter(slug="sevilla")
+        self.assertEqual(entities.count(), 1)
+
+    def test_not_equals_slugs(self):
+        entities = Entity.objects.filter(name="Sevilla")
+        self.assertEqual(entities.count(), 2)
+        self.assertNotEqual(entities[0].slug, entities[1].slug)
