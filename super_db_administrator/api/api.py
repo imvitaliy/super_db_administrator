@@ -27,7 +27,7 @@ class TablesView(View):
 
     def get(self, request, project):
         try:
-            connection = ConnectionDb.objects.get(project_name=project)
+            connection = ConnectionDb.objects.get(name=project)
             print(connection)
             serializer = ConnectionSerializer(connection)
             serializer = serializer.data
@@ -44,7 +44,7 @@ class FieldsView(View):
 
     def get(self, request, project, table):
         try:
-            connection = ConnectionDb.objects.get(project_name=project)
+            connection = ConnectionDb.objects.get(name=project)
             serializer = ConnectionSerializer(connection)
             serializer = serializer.data
 
