@@ -7,7 +7,7 @@ from django.views.generic import View
 
 from api.models import ConnectionDb
 from api.serializers import ConnectionSerializer
-
+from postgres.utils import *
 
 class ConnectionView(View):
     http_method_names = ['get']
@@ -22,64 +22,34 @@ class ConnectionView(View):
             print (e)
 
 
-class PostgresTablesView(View):
+class TablesView(View):
     http_method_names = ['get']
 
-    def get(self, request):
+    def get(self, request, project):
         try:
-            connection = ConnectionDb.objects.all()
-            serializer = ConnectionSerializer(connection, many=True)
-            serializer = serializer.data[0]
-            conn = psycopg2.connect(dbname=serializer['db_name'],
-                                    user=serializer['username'],
-                                    password=serializer['password'],
-                                    host=serializer['host'])
-            cur = conn.cursor()
-            query = """
-                            SELECT
-                             tablename
-                            FROM
-                             pg_catalog.pg_tables
-                            WHERE
-                             schemaname != 'pg_catalog'
-                            AND schemaname != 'information_schema';
-                        """
-            cur.execute(query)
-            tables = cur.fetchall()
-            list_tables = list(itertools.chain.from_iterable(tables))
-            cur.close()
-            conn.close()
+            connection = ConnectionDb.objects.get(project_name=project)
+            print(connection)
+            serializer = ConnectionSerializer(connection)
+            serializer = serializer.data
 
-            return JsonResponse({"tables":list_tables})
+            result = get_postgres_tables(serializer)
+
+            return JsonResponse(result)
         except Exception as e:
             print (e)
 
 
-class PostgresTableColumnsView(View):
+class FieldsView(View):
     http_method_names = ['get']
 
-    def get(self, request, table):
+    def get(self, request, project, table):
         try:
-            connection = ConnectionDb.objects.all()
-            serializer = ConnectionSerializer(connection, many=True)
-            serializer = serializer.data[0]
-            conn = psycopg2.connect(dbname=serializer['db_name'],
-                                    user=serializer['username'],
-                                    password=serializer['password'],
-                                    host=serializer['host'])
-            cur = conn.cursor()
-            query = """
-                        SELECT column_name
-                        FROM information_schema.columns
-                        WHERE table_schema='public'
-                        AND table_name='{}';
-                    """
-            cur.execute(query.format(table))
-            fields = cur.fetchall()
-            list_fields = list(itertools.chain.from_iterable(fields))
-            cur.close()
-            conn.close()
+            connection = ConnectionDb.objects.get(project_name=project)
+            serializer = ConnectionSerializer(connection)
+            serializer = serializer.data
 
-            return JsonResponse({"fields":list_fields})
+            result = get_postgres_fields(serializer, table)
+
+            return JsonResponse(result)
         except Exception as e:
             print (e)

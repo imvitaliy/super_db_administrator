@@ -4,6 +4,7 @@ from django.db import models
 #     name = models.CharField(max_length=200, blank=False)
 
 class ConnectionDb(models.Model):
+    project_name = models.CharField(max_length=100, default="")
     db_name = models.CharField(max_length=200, blank=False, null=False)
     host = models.CharField(max_length=500, blank=False, null=False)
     port = models.IntegerField(blank=False, null=False)
