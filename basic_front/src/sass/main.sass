@@ -4,13 +4,13 @@
 
 @import "fontawesome/font-awesome"
 
+@import "partials/navbar"
+
 // "Inspired" by:
 // http://arisedashboard.com/sport/index.html
 
-
 body
   background-color: $dark_gray
-
   // @include respond-to(mobileM)
   //   background-color: red
   //
@@ -34,7 +34,6 @@ p
   flex-direction: column
   padding: 0
   margin: 0
-  height: 100%
 
 .MainContent, .MainHeader
   background-color: $medium2_gray
@@ -72,22 +71,6 @@ p
   flex: 1
   position: relative
   height: 100%
-
-.MainNav
-  background-color: $medium_gray
-  width: 200px
-  box-sizing: border-box
-  max-width: 200px
-  height: 100%
-  display: inline-block
-  position: absolute
-  border-right: 1px solid $medium3_gray
-  border-top: 1px solid $medium3_gray
-  transition: all .6s
-  padding: 1em
-
-  &.hide
-    transform: translateX(-210px)
 
 .Content
   background-color: $dark_gray

@@ -1,0 +1,100 @@
+
+.MainNav
+  background-color: $medium_gray
+  width: 200px
+  box-sizing: border-box
+  max-width: 200px
+  height: 100%
+  top: -1px
+  display: inline-block
+  position: absolute
+  border-right: 1px solid $medium3_gray
+  transition: all .6s
+  display: flex
+  flex-direction: column
+
+  &.hide
+    transform: translateX(-210px)
+
+.navProfile
+  flex-basis: 100px
+  margin-top: 1em
+  padding: 1em
+  margin-bottom: .5em
+  display: flex
+  flex-direction: column
+  .Photo
+    background-color: rgb(12, 120, 200)
+    margin: 0 auto
+    width: 76px
+    height: 76px
+    padding: 2px
+    text-align: center
+    position: relative
+    img
+      width: 72px
+      border: 2px solid black
+      height: 72px
+    .badge
+      position: absolute
+      top: 50%
+      right: -9px
+      background-color: $green
+      width: 18px
+      height: 18px
+      border-radius: 50%
+      text-align: center
+      font-size: .85em
+      border: 2px solid black
+  .ProfileName
+    text-transform: uppercase
+    color: $ligth_gray
+    font-weight: 200
+    text-align: center
+    font-size: 0.9em
+    padding: .5em 0
+
+.navContent
+  flex: 1
+
+.navList
+  margin: 0
+  list-style: none
+  margin: 1em auto
+  padding: 0
+
+.navListItem
+  border-bottom: 1px solid $medium3_gray
+  cursor: pointer
+  .navListItemLink
+    padding: .6em .5em .6em 1em
+    color: $ligth_gray
+    text-decoration: none
+    display: block
+    height: 100%
+
+  i
+    font-size: 1.5em
+    margin-right: .5em
+
+  &.active
+    .navListItemLink
+      background-color: $blue
+      color: white
+    .navDropdownList
+      display: block
+
+.navDropdownList
+  list-style: none
+  padding: 0.8em 0
+  display: none
+
+
+.navDropdownListItem
+  height: 2em
+  .navDropdownListItemLink
+    display: block
+    height: 100%
+    padding-left: 2em
+    color: $ligth_gray
+    text-decoration: none
