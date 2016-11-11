@@ -1,225 +1,27 @@
 from django.http import JsonResponse
+from django.http import HttpResponse
+
+from rest_framework import viewsets
+from rest_framework.decorators import list_route, detail_route
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+from rest_framework import status
+
+from api.models.connection import Connection
+from api.serializers.connection import ConnectionSerializer
 
 
-USER_LIST = [
-    {
-        "username" : "pepe",
-        "age" : 23,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "joselito",
-        "age" : 24,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "manolito",
-        "age" : 44,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "pedrosanchez",
-        "age" : 48,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "josemota",
-        "age" : 63,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "damian",
-        "age" : 47,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "kilot",
-        "age" : 87,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "fmanzano",
-        "age" : 34,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "hyuya",
-        "age" : 36,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-    {
-        "username" : "hinata",
-        "age" : 23,
-        "role" : "Web Developer",
-        "available_dbs" : [
-            {
-                "db" : "MySQL",
-                "host" : "localhost",
-                "port" : 3306,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-            {
-                "db" : "MongoDB",
-                "host" : "localhost",
-                "port" : 27017,
-                "db_user" : "pepito",
-                "db_pass" : "aasd_Asd3aasdA_456sc5"
-            },
-        ]
-    },
-]
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
 
-
-def user_api_view(request):
-    return JsonResponse(USER_LIST, safe=False)
-
-def user_detail_api_view(request, user):
-    try:
-        return JsonResponse(USER_LIST[int(user)])
-    except Exception as e:
-        raise Exception
+def Connection(requests):
+    if requests.methods == "GET":
+        connection = Connection.objects.all()
+        serializer = ConnectionSerializer(connection)
+        return JSONResponse(serializer.data)
