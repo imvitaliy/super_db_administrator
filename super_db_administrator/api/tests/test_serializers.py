@@ -7,12 +7,14 @@ class ConnectionSerializerTests(TestCase):
     def test_return_all_object(self):
         objectToSerialize = {
             'db_name':'db_name',
+            'name':'test',
             'host':'127.0.0.1',
             'port':5432,
             'username':'username',
             'password':'password'
         }
         connectionDb = ConnectionDb()
+        connectionDb.name = objectToSerialize['name']
         connectionDb.db_name = objectToSerialize['db_name']
         connectionDb.host = objectToSerialize['host']
         connectionDb.port = objectToSerialize['port']
@@ -21,7 +23,8 @@ class ConnectionSerializerTests(TestCase):
         connectionDb.save()
         connectionDbToCheck = ConnectionDb.objects.get(id=connectionDb.id)
         serializer = ConnectionSerializer(connectionDbToCheck)
-        print(type(serializer.data))
+        print(serializer.data)
+        print(objectToSerialize)
         self.assertDictEqual(serializer.data, objectToSerialize)
         self.assertEqual(serializer.data['db_name'], objectToSerialize['db_name'])
         self.assertEqual(serializer.data['host'], objectToSerialize['host'])
