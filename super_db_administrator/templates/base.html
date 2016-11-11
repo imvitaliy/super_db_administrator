@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+  <head>{% load static %}
     <meta charset="utf-8">
     <title>SuperDB Administrator | {% block title %}Page without title tag{% endblock %}</title>
+    <link rel="stylesheet" href="{% static '/css/super_db_admin.css' %}"/>
   </head>
   <body>
     <h1 id="main_heading">SuperDB Administrator</h1>
+    {% block content %} {% endblock %}
   </body>
+  <script src="{% static '/js/super_db_admin.js' %}"></script>
 </html>
