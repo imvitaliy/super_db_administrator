@@ -9,7 +9,12 @@ class ConnectionDb(SlugableBehaviour, models.Model):
     host = models.CharField(max_length=500, blank=False, null=False)
     port = models.IntegerField(blank=False, null=False)
     ssl = models.IntegerField(blank=True, null=True)
-    # when we will have more databases
-    # maintenance_db = models.ForeignKey(MaintenanceDB, on_delete=models.CASCADE)
     username = models.CharField(max_length=200, blank=False, null=False)
     password = models.CharField(max_length=200, blank=False, null=False)
+
+
+    def create(self, data):
+            """
+            Create and return a new `Snippet` instance, given the validated data.
+            """
+            return self.objects.create(**data)

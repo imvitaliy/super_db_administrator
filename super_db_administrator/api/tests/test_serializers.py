@@ -23,8 +23,7 @@ class ConnectionSerializerTests(TestCase):
         connectionDb.save()
         connectionDbToCheck = ConnectionDb.objects.get(id=connectionDb.id)
         serializer = ConnectionSerializer(connectionDbToCheck)
-        print(serializer.data)
-        print(objectToSerialize)
+
         self.assertDictEqual(serializer.data, objectToSerialize)
         self.assertEqual(serializer.data['db_name'], objectToSerialize['db_name'])
         self.assertEqual(serializer.data['host'], objectToSerialize['host'])

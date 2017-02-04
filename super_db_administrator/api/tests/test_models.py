@@ -32,18 +32,3 @@ class ConnectionTests(TestCase):
         self.assertEqual(objectToSave['port'], databaseToCheck.port)
         self.assertEqual(objectToSave['username'], databaseToCheck.username)
         self.assertEqual(objectToSave['password'], databaseToCheck.password)
-
-class SlugTestCase(TestCase):
-
-    def setUp(self):
-        e1 = ConnectionDb.objects.create(name="Project")
-        e2 = ConnectionDb.objects.create(name="Project")
-
-    def test_entities_unique(self):
-        entities = ConnectionDb.objects.filter(slug="sevilla")
-        self.assertEqual(entities.count(), 1)
-
-    def test_not_equals_slugs(self):
-        entities = ConnectionDb.objects.filter(name="Project")
-        self.assertEqual(entities.count(), 2)
-        self.assertNotEqual(entities[0].slug, entities[1].slug)
